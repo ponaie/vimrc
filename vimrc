@@ -13,22 +13,22 @@ Bundle 'gmarik/vundle'
 " "my Bundle here:
 " " original repos on github
 " "......................................
-Bundle 'jiangmiao/auto-pairs'
 Bundle 'easymotion/vim-easymotion'
-Bundle 'tpope/vim-fugitive'
-Bundle 'SirVer/ultisnips'
 Bundle 'honza/vim-snippets'
-Bundle 'nathanaelkane/vim-indent-guides'
+Bundle 'jiangmiao/auto-pairs'
 Bundle 'kshenoy/vim-signature'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'vim-syntastic/syntastic'
 Bundle 'scrooloose/nerdcommenter'
 Bundle 'scrooloose/nerdtree'
+Bundle 'SirVer/ultisnips'
+Bundle 'tpope/vim-fugitive'
+Bundle 'Valloric/YouCompleteMe'
+Bundle 'vim-syntastic/syntastic'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
-"Bundle 'kien/ctrlp.vim'
-"Bundle 't9md/vim-quickhl'
-"Bundle 'Valloric/ListToggle'
+Bundle 'yggdroot/indentline'
+" Bundle 'kien/ctrlp.vim'
+" Bundle 't9md/vim-quickhl'
+" Bundle 'Valloric/ListToggle'
 
 "C Plus Plus
 Bundle 'octol/vim-cpp-enhanced-highlight'
@@ -41,19 +41,20 @@ Bundle 'python-mode/python-mode'
 
 "HTML
 Bundle 'mattn/emmet-vim'
+" Bundle 'tpope/vim-surround'
 
 
 " ".....................................
 " " vim-scripts repos
 " ".....................................
 Bundle 'bufexplorer.zip'
-Bundle 'EasyGrep'
-Bundle 'ShowPairs'
-Bundle 'VimIM'
-"Bundle 'YankRing.vim'
-"Bundle 'SudoEdit.vim'
-"Bundle 'VOoM'
-"Bundle 'vcscommand.vim'
+" Bundle 'EasyGrep'
+" Bundle 'ShowPairs'
+" Bundle 'VimIM'
+" Bundle 'YankRing.vim'
+" Bundle 'SudoEdit.vim'
+" Bundle 'VOoM'
+" Bundle 'vcscommand.vim'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -86,6 +87,14 @@ autocmd FileType html,css EmmetInstall
 "let g:user_emmet_leader_key = '<C-T>'
 "Note that the trailing , still needs to be entered, so the new keymap would
 "be <C-Z>,
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" indentline
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:indentLine_char = '┊'
+let g:indentLine_color_term = 239
+let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -455,7 +464,7 @@ func! CompileRunGcc()
         exec "!clang % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'cpp'
-        exec "!clang++ -std=c++14 -Wall % -o %<"
+        exec "!clang++ -std=c++11 % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'java'
         exec "!javac %"
