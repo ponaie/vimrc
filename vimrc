@@ -30,18 +30,23 @@ Bundle 'yggdroot/indentline'
 " Bundle 't9md/vim-quickhl'
 " Bundle 'Valloric/ListToggle'
 
-"C Plus Plus
+" C Plus Plus
 Bundle 'octol/vim-cpp-enhanced-highlight'
 Bundle 'derekwyatt/vim-fswitch'
 
-"Python Plugins
+" Python Plugins
 Bundle 'python-mode/python-mode'
 "Bundle 'nvie/vim-flake8'
 "Bundle 'indentpython.vim'
 
-"HTML
+" HTML
 Bundle 'mattn/emmet-vim'
 " Bundle 'tpope/vim-surround'
+
+
+" MarkDown
+Bundle 'godlygeek/tabular'
+Bundle 'plasticboy/vim-markdown'
 
 
 " ".....................................
