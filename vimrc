@@ -26,9 +26,7 @@ Bundle 'vim-syntastic/syntastic'
 Bundle 'vim-airline/vim-airline'
 Bundle 'vim-airline/vim-airline-themes'
 Bundle 'yggdroot/indentline'
-" Bundle 'kien/ctrlp.vim'
-" Bundle 't9md/vim-quickhl'
-" Bundle 'Valloric/ListToggle'
+Bundle 'ctrlpvim/ctrlp.vim'
 
 " C Plus Plus
 Bundle 'octol/vim-cpp-enhanced-highlight'
@@ -36,13 +34,10 @@ Bundle 'derekwyatt/vim-fswitch'
 
 " Python Plugins
 Bundle 'python-mode/python-mode'
-"Bundle 'nvie/vim-flake8'
-"Bundle 'indentpython.vim'
 
 " HTML
 Bundle 'mattn/emmet-vim'
 " Bundle 'tpope/vim-surround'
-
 
 " MarkDown
 Bundle 'godlygeek/tabular'
@@ -53,13 +48,7 @@ Bundle 'plasticboy/vim-markdown'
 " " vim-scripts repos
 " ".....................................
 Bundle 'bufexplorer.zip'
-" Bundle 'EasyGrep'
-" Bundle 'ShowPairs'
-" Bundle 'VimIM'
-" Bundle 'YankRing.vim'
-" Bundle 'SudoEdit.vim'
-" Bundle 'VOoM'
-" Bundle 'vcscommand.vim'
+Bundle 'YankRing.vim'
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -137,10 +126,61 @@ let g:NERDTrimTrailingWhitespace = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" vim-signature
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" mx           Toggle mark 'x' and display it in the leftmost column
+" dmx          Remove mark 'x' where x is a-zA-Z
+
+" m,           Place the next available mark
+" m.           If no mark on line, place the next available mark. Otherwise, remove (first) existing mark.
+" m-           Delete all marks from the current line
+" m<Space>     Delete all marks from the current buffer
+" ]`           Jump to next mark
+" [`           Jump to prev mark
+" ]'           Jump to start of next line containing a mark
+" ['           Jump to start of prev line containing a mark
+" `]           Jump by alphabetical order to next mark
+" `[           Jump by alphabetical order to prev mark
+" ']           Jump by alphabetical order to start of next line having a mark
+" '[           Jump by alphabetical order to start of prev line having a mark
+" m/           Open location list and display marks from current buffer
+"
+" m[0-9]       Toggle the corresponding marker !@#$%^&*()
+" m<S-[0-9]>   Remove all markers of the same type
+" ]-           Jump to next line having a marker of the same type
+" [-           Jump to prev line having a marker of the same type
+" ]=           Jump to next line having a marker of any type
+" [=           Jump to prev line having a marker of any type
+" m?           Open location list and display markers from current buffer
+" m<BS>        Remove all markers
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Ctrlp
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" Once CtrlP is open:
+" Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
+" Press <c-f> and <c-b> to cycle between modes.
+" Press <c-d> to switch to filename only search instead of full path.
+" Press <c-r> to switch to regexp mode.
+" Use <c-j>, <c-k> or the arrow keys to navigate the result list.
+" Use <c-t> or <c-v>, <c-x> to open the selected entry in a new tab or in a new split.
+" Use <c-n>, <c-p> to select the next/previous string in the prompt's history.
+" Use <c-y> to create a new file and its parent directories.
+" Use <c-z> to mark/unmark multiple files and <c-o> to open them.
+
+let g:ctrlp_map = '<C-p>'
+let g:ctrlp_cmd = 'CtrlP'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ YankRing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" nnoremap <silent> <F2> :YRShow<CR>
-" let g:yankring_history_dir = '$HOME/.vim/bundle/YankRing.vim/'
+nnoremap <silent> <F2> :YRSow<CR>
+let g:yankring_replace_n_pkey = '<M-p>'
+let g:yankring_replace_n_nkey = '<M-n>'
+let g:yankring_history_dir = '$HOME/.vim/YankRing/'
+let g:yankring_dot_repeat_yank = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -169,6 +209,37 @@ autocmd BufWinEnter \[Buf\ List\] setl nonumber "
 " let g:lt_location_list_toggle_map = '<Leader>l'
 " let g:lt_quickfix_list_toggle_map = '<Leader>q'
 " let g:lt_height = 10
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" python-mode
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:pymode_rope_completion = 0  " 禁用python-mode自动补全功能，防止与YouCompleteMe冲突
+let g:pymode_python = 'python3'
+let g:pymode_doc_bind = 'K'       " Bind keys to show documentation for current word(selction)
+let g:pymode_virtualenv = 1       " Enable automatic virtualenv detection
+
+"Override go-to.definition key shortcut to Ctrl-]
+" let g:pymode_rope_goto_definition_bind = "<C-]>"
+"Override run current python file key shortcut to Ctrl-Shift-e
+"let g:pymode_run_bind = "<C-S-e>"
+"Override view python doc key shortcut to Ctrl-Shift-d
+"let g:pymode_doc_bind = "<C-S-d>"
+
+set statusline+=%#warningmsg#
+set statusline+=%{SyntasticStatuslineFlag()}
+set statusline+=%*
+
+let g:syntastic_always_populate_loc_list = 1
+let g:syntastic_auto_loc_list = 1
+let g:syntastic_check_on_open = 1
+let g:syntastic_check_on_wq = 0
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let python_highlight_all=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -224,41 +295,10 @@ inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
 let g:ycm_python_binary_path = 'python3'
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_key_invoke_completion = '<C-]>'
+let g:ycm_key_invoke_completion = '<C-m>'
 " Defines a shortcut for goto definition
 map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 nmap <F4> :YcmDiags<CR>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" python-mode
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pymode_rope_completion = 0  " 禁用python-mode自动补全功能，防止与YouCompleteMe冲突
-let g:pymode_python = 'python3'
-let g:pymode_doc_bind = 'K'       " Bind keys to show documentation for current word(selction)
-let g:pymode_virtualenv = 1       " Enable automatic virtualenv detection
-
-"Override go-to.definition key shortcut to Ctrl-]
-" let g:pymode_rope_goto_definition_bind = "<C-]>"
-"Override run current python file key shortcut to Ctrl-Shift-e
-"let g:pymode_run_bind = "<C-S-e>"
-"Override view python doc key shortcut to Ctrl-Shift-d
-"let g:pymode_doc_bind = "<C-S-d>"
-
-set statusline+=%#warningmsg#
-set statusline+=%{SyntasticStatuslineFlag()}
-set statusline+=%*
-
-let g:syntastic_always_populate_loc_list = 1
-let g:syntastic_auto_loc_list = 1
-let g:syntastic_check_on_open = 1
-let g:syntastic_check_on_wq = 0
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let python_highlight_all=1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -328,7 +368,14 @@ au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
 au FileType html,css setlocal noexpandtab shiftwidth=2 tabstop=2 softtabstop=2
 
 " 标示不必要的空白字符
-au BufRead,BufNewFile match BadWhitespace /\s\+$/
+highlight TrailSpace guibg=red ctermbg=red
+match TrailSpace / \+$/
+autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
+
+" highlight UnwanttedTab ctermbg=red guibg=darkred
+" match UnwanttedTab /\t/
+" autocmd ColorScheme * highlight UnwanttedTab ctermbg=red guibg=darkred
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ 键盘命令
@@ -349,7 +396,7 @@ nmap <Leader>p "+p
 nmap <Leader>M %
 
 " 定义快捷键关闭当前分割窗口
-"nmap <Leader>q :q<CR>
+nmap <Leader>q :q<CR>
 " 定义快捷键保存当前窗口内容
 nmap <Leader>w :w<CR>
 " 定义快捷键保存所有窗口内容并退出 vim
@@ -369,7 +416,7 @@ nnoremap <Leader>kw <C-W>k
 " 跳转至下方的子窗口
 nnoremap <Leader>jw <C-W>j
 
-" shift tab pages
+" shift tab pages(Default gt, gT)
 map <Leader>tp :tabp<CR>
 map <Leader>tn :tabn<CR>
 
@@ -492,7 +539,7 @@ endfunc
 map <F8> :call Rungdb()<CR>
 func! Rungdb()
     exec "w"
-    exec "!clang++ % -g -o %<"
+    exec "!clang++ -std=c++11 % -g -o %<"
     exec "!gdb ./%<"
 endfunc
 

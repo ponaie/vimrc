@@ -37,6 +37,8 @@ Bundle 'vim-airline/vim-airline-themes'
 
 Bundle 'yggdroot/indentline'
 
+Bundle 'ctrlpvim/ctrlp.vim'
+
 ## C Plus Plus
 Bundle 'octol/vim-cpp-enhanced-highlight'
 
