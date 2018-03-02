@@ -1,56 +1,55 @@
 # Intro
-This is the config file of VIM.
+This is a config file for VIM.
 
 # Usage
 rename it to .vimrc and put it in your $HOME directory, restart VIM.
 
-I use Vundle as VIM plugin manager. So you need to run `:BundleInstall` at first.
+Then run `:PluginInstall` at first.
 
 # Plugins included
 ## The plugin manager
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 ## Common plugins
-Bundle 'easymotion/vim-easymotion'
+Plugin 'ctrlpvim/ctrlp.vim'
 
-Bundle 'honza/vim-snippets'
+Plugin 'easymotion/vim-easymotion'
 
-Bundle 'jiangmiao/auto-pairs'
+Plugin 'honza/vim-snippets'
 
-Bundle 'kshenoy/vim-signature'
+Plugin 'jiangmiao/auto-pairs'
 
-Bundle 'scrooloose/nerdcommenter'
+Plugin 'kshenoy/vim-signature'
 
-Bundle 'scrooloose/nerdtree'
+Plugin 'scrooloose/nerdcommenter'
 
-Bundle 'SirVer/ultisnips'
+Plugin 'scrooloose/nerdtree'
 
-Bundle 'tpope/vim-fugitive'
+Plugin 'SirVer/ultisnips'
 
-Bundle 'Valloric/YouCompleteMe'
+Plugin 'tpope/vim-fugitive'
 
-Bundle 'vim-syntastic/syntastic'
+Plugin 'Valloric/YouCompleteMe'
 
-Bundle 'vim-airline/vim-airline'
+Plugin 'vim-syntastic/syntastic'
 
-Bundle 'vim-airline/vim-airline-themes'
+Plugin 'vim-airline/vim-airline'
 
-Bundle 'yggdroot/indentline'
+Plugin 'vim-airline/vim-airline-themes'
 
-Bundle 'ctrlpvim/ctrlp.vim'
+Plugin 'yggdroot/indentline'
+
+Plugin 'bufexplorer.zip'
+Plugin 'YankRing.vim'
 
 ## C Plus Plus
-Bundle 'octol/vim-cpp-enhanced-highlight'
+Plugin 'octol/vim-cpp-enhanced-highlight'
 
-Bundle 'derekwyatt/vim-fswitch'
+Plugin 'derekwyatt/vim-fswitch'
 
 ## Python
-Bundle 'python-mode/python-mode'
+
+Plugin 'python-mode/python-mode'
 
 ## HTML
-Bundle 'mattn/emmet-vim'
-
-## MarkDown
-Bundle 'godlygeek/tabular'
-
-Bundle 'plasticboy/vim-markdown'
+Plugin 'mattn/emmet-vim'

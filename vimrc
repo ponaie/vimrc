@@ -7,48 +7,58 @@ set rtp+=~/.vim/bundle/vundle/
 call vundle#rc()
 
 " let Vundle manage Vundle
-Bundle 'gmarik/vundle'
+Plugin 'gmarik/vundle'
 
 " "......................................
-" "my Bundle here:
+" "my Plugin here:
 " " original repos on github
 " "......................................
-Bundle 'easymotion/vim-easymotion'
-Bundle 'honza/vim-snippets'
-Bundle 'jiangmiao/auto-pairs'
-Bundle 'kshenoy/vim-signature'
-Bundle 'scrooloose/nerdcommenter'
-Bundle 'scrooloose/nerdtree'
-Bundle 'SirVer/ultisnips'
-Bundle 'tpope/vim-fugitive'
-Bundle 'Valloric/YouCompleteMe'
-Bundle 'vim-syntastic/syntastic'
-Bundle 'vim-airline/vim-airline'
-Bundle 'vim-airline/vim-airline-themes'
-Bundle 'yggdroot/indentline'
-Bundle 'ctrlpvim/ctrlp.vim'
+Plugin 'ctrlpvim/ctrlp.vim'
+Plugin 'dkprice/vim-easygrep'
+Plugin 'easymotion/vim-easymotion'
+Plugin 'honza/vim-snippets'
+Plugin 'jiangmiao/auto-pairs'
+Plugin 'kshenoy/vim-signature'
+Plugin 'nelstrom/vim-visual-star-search'
+Plugin 'rdnetto/YCM-Generator'
+Plugin 'scrooloose/nerdcommenter'
+Plugin 'scrooloose/nerdtree'
+Plugin 'SirVer/ultisnips'
+Plugin 'tpope/vim-fugitive'
+Plugin 'Valloric/YouCompleteMe'
+Plugin 'Valloric/ListToggle'
+Plugin 'vim-syntastic/syntastic'
+Plugin 'vim-airline/vim-airline'
+Plugin 'vim-airline/vim-airline-themes'
+Plugin 'yggdroot/indentline'
 
 " C Plus Plus
-Bundle 'octol/vim-cpp-enhanced-highlight'
-Bundle 'derekwyatt/vim-fswitch'
+Plugin 'octol/vim-cpp-enhanced-highlight'
+Plugin 'derekwyatt/vim-fswitch'
 
 " Python Plugins
-Bundle 'python-mode/python-mode'
+Plugin 'python-mode/python-mode'
+
+" Go
+"Plugin 'fatih/vim-go'
 
 " HTML
-Bundle 'mattn/emmet-vim'
-" Bundle 'tpope/vim-surround'
-
-" MarkDown
-Bundle 'godlygeek/tabular'
-Bundle 'plasticboy/vim-markdown'
+Plugin 'mattn/emmet-vim'
+Plugin 'tpope/vim-surround'
+Plugin 'glench/vim-jinja2-syntax'
 
 
 " ".....................................
 " " vim-scripts repos
 " ".....................................
-Bundle 'bufexplorer.zip'
-Bundle 'YankRing.vim'
+Plugin 'bufexplorer.zip'
+Plugin 'YankRing.vim'
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Leader Key
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let mapleader=";"            " 定义快捷键的前缀
 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -95,8 +105,8 @@ let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 """ NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "列出当前目录文件
-map <F3> :NERDTreeToggle<CR>
-imap <F3> <ESC> :NERDTreeToggle<CR>
+map <F2> :NERDTreeToggle<CR>
+imap <F2> <ESC> :NERDTreeToggle<CR>
 " ignore files in NERDTree
 let g:NERDTreeIgnore = ['\.o$', '\.pyc$', '^\.git$']
 "当打开vim且没有文件时自动打开NERDTree
@@ -156,7 +166,23 @@ let g:NERDTrimTrailingWhitespace = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" Ctrlp
+""" Easygrep
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" <Leader>vv  - Grep for the word under the cursor, match all occurences,
+"               like |gstar|
+" <Leader>vV  - Grep for the word under the cursor, match whole word, like
+"               |star|
+" <Leader>va  - Like vv, but add to existing list
+" <Leader>vA  - Like vV, but add to existing list
+" <Leader>vr  - Perform a global search on the word under the cursor
+"               and prompt for a pattern with which to replace it.
+" <Leader>vo  - Select the files to search in and set grep options
+" <Leader>vy* - Invoke any option from the options explorer, where * is the
+"               shortcut for that option.
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" CtrlP
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " Once CtrlP is open:
 " Press <F5> to purge the cache for the current directory to get new files, remove deleted files and apply new ignore options.
@@ -176,10 +202,10 @@ let g:ctrlp_cmd = 'CtrlP'
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ YankRing
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-nnoremap <silent> <F2> :YRSow<CR>
+nnoremap <silent> <Leader>yr :YRShow<CR>
 let g:yankring_replace_n_pkey = '<M-p>'
 let g:yankring_replace_n_nkey = '<M-n>'
-let g:yankring_history_dir = '$HOME/.vim/YankRing/'
+let g:yankring_history_dir = '$HOME/.vim/YankRing'
 let g:yankring_dot_repeat_yank = 1
 
 
@@ -206,40 +232,37 @@ autocmd BufWinEnter \[Buf\ List\] setl nonumber "
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ ListToggle
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" let g:lt_location_list_toggle_map = '<Leader>l'
-" let g:lt_quickfix_list_toggle_map = '<Leader>q'
-" let g:lt_height = 10
+let g:lt_location_list_toggle_map = '<Leader>ll'
+let g:lt_quickfix_list_toggle_map = '<Leader>q'
+let g:lt_height = 8
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ python-mode
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:pymode_rope_completion = 0  " 禁用python-mode自动补全功能，防止与YouCompleteMe冲突
 let g:pymode_python = 'python3'
-let g:pymode_doc_bind = 'K'       " Bind keys to show documentation for current word(selction)
 let g:pymode_virtualenv = 1       " Enable automatic virtualenv detection
+let g:pymode_lint_unmodified = 1  " Check code on every save
+let g:pymode_lint_on_fly = 1      " Check code when editing
+let g:pymode_trim_whitespaces = 1 " Trim unused white spaces on save
+let g:pymode_rope = 0             " Disable rope
+let g:pymode_rope_completion = 0  " 禁用python-mode自动补全功能，防止与YouCompleteMe冲突
+let g:pymode_doc = 0              " Turn off the documentation script
+let g:pymode_run = 0              " Turn off the run code script
 
-"Override go-to.definition key shortcut to Ctrl-]
-" let g:pymode_rope_goto_definition_bind = "<C-]>"
-"Override run current python file key shortcut to Ctrl-Shift-e
-"let g:pymode_run_bind = "<C-S-e>"
-"Override view python doc key shortcut to Ctrl-Shift-d
-"let g:pymode_doc_bind = "<C-S-d>"
-
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" syntastic
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 set statusline+=%#warningmsg#
 set statusline+=%{SyntasticStatuslineFlag()}
 set statusline+=%*
 
 let g:syntastic_always_populate_loc_list = 1
 let g:syntastic_auto_loc_list = 1
+let g:syntastic_loc_list_height = 5
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" syntastic
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let python_highlight_all=1
+let g:syntastic_mode_map = {"passive_filetypes": ["python"]}
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -251,54 +274,18 @@ let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" 解决Ultisnips与YouCompleteMe快捷键冲突
-"''"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:UltiSnipsExpandTrigger       ="<c-tab>"
-let g:UltiSnipsJumpForwardTrigger  = "<tab>"
-let g:UltiSnipsJumpBackwardTrigger = "<s-tab>"
-
-" Enable tabbing through list of results
-function! g:UltiSnips_Complete()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res == 0
-        if pumvisible()
-            return "\<C-n>"
-        else
-            call UltiSnips#JumpForwards()
-            if g:ulti_jump_forwards_res == 0
-               return "\<TAB>"
-            endif
-        endif
-    endif
-    return ""
-endfunction
-
-au InsertEnter * exec "inoremap <silent> " . g:UltiSnipsExpandTrigger . " <C-R>=g:UltiSnips_Complete()<cr>"
-
-" Expand snippet or return
-let g:ulti_expand_res = 0
-function! Ulti_ExpandOrEnter()
-    call UltiSnips#ExpandSnippet()
-    if g:ulti_expand_res
-        return ''
-    else
-        return "\<return>"
-endfunction
-
-" Set <space> as primary trigger
-inoremap <return> <C-R>=Ulti_ExpandOrEnter()<CR>
-
-
-""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ YouCompleteMe
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let g:ycm_global_ycm_extra_conf = '~/.vim/.ycm_extra_conf.py'
+let g:ycm_confirm_extra_conf = 0
 let g:ycm_python_binary_path = 'python3'
 let g:ycm_autoclose_preview_window_after_completion=1
-let g:ycm_key_invoke_completion = '<C-m>'
-" Defines a shortcut for goto definition
-map <leader>g  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+let g:ycm_echo_current_diagnostic = 1
+nmap <F3> :YcmCompleter GetDoc<CR>
 nmap <F4> :YcmDiags<CR>
+nmap <F6> :YcmGenerateConfig<CR>
+nmap <F7> :YcmCompleter FixIt<CR>
+nmap <F8>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -317,9 +304,9 @@ set noeb                     " 去掉输入错误的提示声音
 set confirm                  " 在处理未保存或只读文件的时候，弹出确认
 set nobackup                 " 禁止生成临时文件
 set noswapfile
-set ignorecase               " 搜索忽略大小写
+set smartcase                " 智能搜索大小写
 set linespace=0
-set completeopt=longest,menu     " 代码补全
+set completeopt=longest,menu " 代码补全
 set wildmenu                 " 增强模式中的命令行自动完成操作
 set backspace=2              " 使回格键（backspace）正常处理indent, eol, start等
 set mouse=a                  " 可以在buffer的任何地方使用鼠标
@@ -332,9 +319,9 @@ set hidden                   " 避免必须保存修改才可以跳转buffer
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ 显示相关
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 显示中文帮助
-set helplang=cn
 set encoding=utf-8
+" :H 打开一个垂直帮助窗口
+command -nargs=* -complete=help H vertical belowright help <args>
 
 set number                   " 显示行号
 set history=1000             " 历史记录数
@@ -353,21 +340,7 @@ set fillchars=vert:\ ,stl:\ ,stlnc:\    " 在被分割的窗口间显示空白�
 set showmatch                " 高亮显示匹配的括号
 set matchtime=1              " 匹配括号高亮的时间（单位是十分之一秒）
 
-
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-" indentation
-"""""""""""""""""""""""""""""""""""""""""""""""""""
-" set cindent
-set autoindent               " 自动缩进
-set tabstop=4                " Tab键的宽度
-set softtabstop=4            " 统一缩进为4
-set shiftwidth=4
-set expandtab                " 使用空格代替制表符
-" set smarttab               " 在行和段开始处使用制表符
-au FileType python setlocal shiftwidth=4 tabstop=4 softtabstop=4
-au FileType html,css setlocal noexpandtab shiftwidth=2 tabstop=2 softtabstop=2
-
-" 标示不必要的空白字符
+" 标示行尾空白字符
 highlight TrailSpace guibg=red ctermbg=red
 match TrailSpace / \+$/
 autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
@@ -377,49 +350,37 @@ autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
 " autocmd ColorScheme * highlight UnwanttedTab ctermbg=red guibg=darkred
 
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" indentation
+"""""""""""""""""""""""""""""""""""""""""""""""""""
+" set autoindent               " 自动缩进
+set cindent                  " C风格缩进
+set tabstop=4                " Tab键的宽度
+set softtabstop=4            " 统一缩进为4
+set shiftwidth=4
+set expandtab                " 使用空格代替制表符
+au FileType cpp setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+au FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
+au FileType html,css setlocal noexpandtab shiftwidth=2 softtabstop=2 tabstop=2
+
+
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ 键盘命令
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" 定义快捷键的前缀
-let mapleader=";"
+vnoremap <Leader>y "+y       " 设置快捷键将选中文本块复制至系统剪贴板
+nmap <Leader>p "+p           " 设置快捷键将系统剪贴板内容粘贴至 vim
 
-" 定义快捷键到行首和行尾
-nmap LB 0
-nmap LE $
+" map <C-w> <C-w>w
+nnoremap nw <C-W><C-W>       " 依次遍历子窗口
+nnoremap <Leader>jw <C-W>j   " 跳转至下方的子窗口
+nnoremap <Leader>kw <C-W>k   " 跳转至上方的子窗口
+nnoremap <Leader>hw <C-W>h   " 跳转至左方的窗口
+nnoremap <Leader>lw <C-W>l   " 跳转至右方的窗口
 
-" 设置快捷键将选中文本块复制至系统剪贴板
-vnoremap <Leader>y "+y
-" 设置快捷键将系统剪贴板内容粘贴至 vim
-nmap <Leader>p "+p
-
-" 定义快捷键在结对符之间跳转
-nmap <Leader>M %
-
-" 定义快捷键关闭当前分割窗口
-nmap <Leader>q :q<CR>
-" 定义快捷键保存当前窗口内容
-nmap <Leader>w :w<CR>
-" 定义快捷键保存所有窗口内容并退出 vim
-nmap <Leader>WQ :wa<CR>:q<CR>
-" 不做任何保存，直接退出 vim
-" nmap <Leader>Q :qa!<CR>
-
-" 依次遍历子窗口
-nnoremap nw <C-W><C-W>
-map <C-w> <C-w>w
-" 跳转至右方的窗口
-nnoremap <Leader>lw <C-W>l
-" 跳转至左方的窗口
-nnoremap <Leader>hw <C-W>h
-" 跳转至上方的子窗口
-nnoremap <Leader>kw <C-W>k
-" 跳转至下方的子窗口
-nnoremap <Leader>jw <C-W>j
-
-" shift tab pages(Default gt, gT)
+" tab快速导航
+" Keyboard shortcut is gt, gT.
 map <Leader>tp :tabp<CR>
 map <Leader>tn :tabn<CR>
-
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " buffer快速导航
@@ -454,10 +415,15 @@ func! SetTitle()
         call setline(1,"\#!/bin/bash")
         call append(line("."), "")
     elseif &filetype == 'python'
-        call setline(1,"#!/usr/bin/env python3")
-        call append(line("."),"# -*- coding: utf-8 -*-")
-        call append(line(".")+1, "# Created Time: ".strftime("%c"))
-        call append(line(".")+2, "")
+        call setline(1, "# ------------------------------------------------------------------------")
+        call append(line("."), "# File Name: ".expand("%"))
+        call append(line(".")+1, "# Author: Stranger")
+        call append(line(".")+2, "# Mail: xxueqiang16@gmail.com")
+        call append(line(".")+3, "# Created Time: ".strftime("%c"))
+        call append(line(".")+4, "# ------------------------------------------------------------------------")
+        call append(line(".")+5, "")
+        call append(line(".")+6, "")
+        call append(line(".")+7, "")
     elseif &filetype == 'ruby'
         call setline(1,"#!/usr/bin/env ruby")
         call append(line("."),"# encoding: utf-8")
@@ -474,6 +440,7 @@ func! SetTitle()
         call append(line(".")+3, "    > Created Time: ".strftime("%c"))
         call append(line(".")+4, " ************************************************************************/")
         call append(line(".")+5, "")
+        call append(line(".")+6, "")
     endif
     if expand("%:e") == 'cpp'
         call append(line(".")+6, "#include <iostream>")
@@ -505,10 +472,8 @@ endfunc
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-""" F5编译运行 F8调试
+""" F5编译运行
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-:autocmd BufRead,BufNewFile *.dot map <F5> :w<CR>:!dot -Tjpg -o %<.jpg % && eog %<.jpg  <CR><CR> && exec "redr!"
-"C，C++ 按F5编译运行
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
     exec "w"
@@ -516,32 +481,26 @@ func! CompileRunGcc()
         exec "!clang % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'cpp'
-        exec "!clang++ -std=c++11 % -o %<"
+        exec "!clang++ -std=c++14 % -o %<"
         exec "!time ./%<"
     elseif &filetype == 'java'
         exec "!javac %"
         exec "!time java %<"
     elseif &filetype == 'sh'
-        :!time bash %
+        exec "!time bash %<"
     elseif &filetype == 'python'
         exec "!time python3 %"
     elseif &filetype == 'html'
         exec "!firefox % &"
     elseif &filetype == 'go'
-"        exec "!go build %<"
+        exec "!go build %"
         exec "!time go run %"
     elseif &filetype == 'mkd'
         exec "!~/.vim/markdown.pl % > %.html &"
         exec "!firefox %.html &"
     endif
 endfunc
-"C,C++的调试
-map <F8> :call Rungdb()<CR>
-func! Rungdb()
-    exec "w"
-    exec "!clang++ -std=c++11 % -g -o %<"
-    exec "!gdb ./%<"
-endfunc
+
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ F12代码格式优化化
@@ -554,7 +513,7 @@ func! FormartSrc()
     if &filetype == 'c'
         exec "!astyle --style=ansi -a --suffix=none %"
     elseif &filetype == 'cpp' || &filetype == 'hpp'
-        exec "r !astyle --style=ansi --one-line=keep-statements -a --suffix=none %> /dev/null 2>&1"
+        exec "r !clang-format --style=Google -i %> /dev/null 2>&1"
     elseif &filetype == 'perl'
         exec "!astyle --style=gnu --suffix=none %"
     elseif &filetype == 'py'||&filetype == 'python'
