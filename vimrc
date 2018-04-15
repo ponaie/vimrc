@@ -105,8 +105,8 @@ let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
 """ NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 "列出当前目录文件
-map <F2> :NERDTreeToggle<CR>
-imap <F2> <ESC> :NERDTreeToggle<CR>
+map <F3> :NERDTreeToggle<CR>
+imap <F3> <ESC> :NERDTreeToggle<CR>
 " ignore files in NERDTree
 let g:NERDTreeIgnore = ['\.o$', '\.pyc$', '^\.git$']
 "当打开vim且没有文件时自动打开NERDTree
@@ -281,7 +281,7 @@ let g:ycm_confirm_extra_conf = 0
 let g:ycm_python_binary_path = 'python3'
 let g:ycm_autoclose_preview_window_after_completion=1
 let g:ycm_echo_current_diagnostic = 1
-nmap <F3> :YcmCompleter GetDoc<CR>
+nmap K :YcmCompleter GetDoc<CR>
 nmap <F4> :YcmDiags<CR>
 nmap <F6> :YcmGenerateConfig<CR>
 nmap <F7> :YcmCompleter FixIt<CR>
@@ -423,7 +423,6 @@ func! SetTitle()
         call append(line(".")+4, "# ------------------------------------------------------------------------")
         call append(line(".")+5, "")
         call append(line(".")+6, "")
-        call append(line(".")+7, "")
     elseif &filetype == 'ruby'
         call setline(1,"#!/usr/bin/env ruby")
         call append(line("."),"# encoding: utf-8")
