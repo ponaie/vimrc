@@ -13,18 +13,20 @@ Plugin 'gmarik/vundle'
 " "my Plugin here:
 " " original repos on github
 " "......................................
+Plugin 'rafi/awesome-vim-colorschemes'
 Plugin 'ctrlpvim/ctrlp.vim'
 Plugin 'dkprice/vim-easygrep'
 Plugin 'easymotion/vim-easymotion'
+" Plugin 'flazz/vim-colorschemes'
 Plugin 'honza/vim-snippets'
 Plugin 'jiangmiao/auto-pairs'
 Plugin 'kshenoy/vim-signature'
-Plugin 'nelstrom/vim-visual-star-search'
-Plugin 'rdnetto/YCM-Generator'
+" Plugin 'rdnetto/YCM-Generator'
 Plugin 'scrooloose/nerdcommenter'
 Plugin 'scrooloose/nerdtree'
 Plugin 'SirVer/ultisnips'
-Plugin 'tpope/vim-fugitive'
+" Plugin 'tpope/vim-fugitive'
+Plugin 'tpope/vim-surround'
 Plugin 'Valloric/YouCompleteMe'
 Plugin 'Valloric/ListToggle'
 Plugin 'vim-syntastic/syntastic'
@@ -42,9 +44,11 @@ Plugin 'python-mode/python-mode'
 " Go
 "Plugin 'fatih/vim-go'
 
+" Scala
+Plugin 'derekwyatt/vim-scala'
+
 " HTML
 Plugin 'mattn/emmet-vim'
-Plugin 'tpope/vim-surround'
 Plugin 'glench/vim-jinja2-syntax'
 
 
@@ -56,6 +60,18 @@ Plugin 'YankRing.vim'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" Color Scheme
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+colorscheme PaperColor
+" colorscheme github
+" colorscheme lightning
+" colorscheme hybrid
+" colorscheme space-vim-dark
+" colorscheme atom
+" set background=light
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Leader Key
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 let mapleader=";"            " 定义快捷键的前缀
@@ -64,7 +80,10 @@ let mapleader=";"            " 定义快捷键的前缀
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ vim-airline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:airline_theme='powerlineish'  " 设置主题
+" let g:airline_theme='powerlineish' " 设置主题
+let g:airline_theme='tomorrow' " 设置主题
+" let g:airline_theme='solarized' " 设置主题
+" let g:airline_theme='luna' " 设置主题
 let g:airline_powerline_fonts = 1  " 使用Powerline字体
 " Automatically displays all buffers when there's only one tab open
 let g:airline#extensions#tabline#enabled = 1
@@ -80,8 +99,8 @@ nmap <silent> <Leader>sw :FSHere<cr>
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ Emmet-vim
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:user_emmet_mode='n'       "only enable normal mode functions
-"let g:user_emmet_mode='a'     "enable all functions in all mode
+let g:user_emmet_mode='n'      " only enable normal mode functions
+"let g:user_emmet_mode='a'     " enable all functions in all mode
 
 "Enable just for html/css
 let g:user_emmet_install_global = 0
@@ -96,14 +115,23 @@ autocmd FileType html,css EmmetInstall
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ indentline
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-let g:indentLine_char = '┊'
+let g:indentLine_char = '¦'
 let g:indentLine_color_term = 239
 let g:indentLine_bufNameExclude = ['_.*', 'NERD_tree.*']
+
+
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" fugitive
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" open quickfix window after any grep invocation
+" autocmd QuickFixCmdPost *grep* cwindow
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ NERDTree
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+"设置NERDTree的宽度,默认为30
+let NERDTreeWinSize=25
 "列出当前目录文件
 map <F3> :NERDTreeToggle<CR>
 imap <F3> <ESC> :NERDTreeToggle<CR>
@@ -111,8 +139,8 @@ imap <F3> <ESC> :NERDTreeToggle<CR>
 let g:NERDTreeIgnore = ['\.o$', '\.pyc$', '^\.git$']
 "当打开vim且没有文件时自动打开NERDTree
 " autocmd vimenter * if !argc() | NERDTree | endif
-" 只剩 NERDTree时自动关闭
-autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTreeType") && b:NERDTreeType == "primary") | q | endif
+" 只剩 NERDTree时自动关闭（DoNotWork!）
+autocmd bufenter * if (winnr("$") == 1 && exists("b:NERDTree") && b:NERDTree.isTabTree()) | q | endif
 let g:NERDTreeBookmarksFile = '$HOME/.vim/bundle/nerdtree/'
 
 
@@ -243,12 +271,13 @@ let g:lt_height = 8
 let g:pymode_python = 'python3'
 let g:pymode_virtualenv = 1       " Enable automatic virtualenv detection
 let g:pymode_lint_unmodified = 1  " Check code on every save
-let g:pymode_lint_on_fly = 1      " Check code when editing
+let g:pymode_lint_on_fly = 0      " Check code when editing
 let g:pymode_trim_whitespaces = 1 " Trim unused white spaces on save
 let g:pymode_rope = 0             " Disable rope
 let g:pymode_rope_completion = 0  " 禁用python-mode自动补全功能，防止与YouCompleteMe冲突
 let g:pymode_doc = 0              " Turn off the documentation script
 let g:pymode_run = 0              " Turn off the run code script
+
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 """ syntastic
@@ -263,6 +292,9 @@ let g:syntastic_loc_list_height = 5
 let g:syntastic_check_on_open = 1
 let g:syntastic_check_on_wq = 0
 let g:syntastic_mode_map = {"passive_filetypes": ["python"]}
+let g:syntastic_scala_checkers = ['scalastyle']
+let g:syntastic_scala_scalastyle_jar = "/usr/local/bin/scalastyle_2.12-1.0.0-batch.jar"
+let g:syntastic_scala_scalastyle_config_file = "/usr/local/etc/scalastyle/scalastyle_config.xml"
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -271,6 +303,9 @@ let g:syntastic_mode_map = {"passive_filetypes": ["python"]}
 let g:UltiSnipsUsePythonVersion = 3
 let g:UltiSnipsSnippetDirectories=['UltiSnips']
 let g:UltiSnipsSnippetsDir = '~/.vim/UltiSnips'
+let g:UltiSnipsExpandTrigger = '<c-e>'
+let g:UltiSnipsJumpForwardTrigger = '<c-n>'
+let g:UltiSnipsJumpBackwardTrigger = '<c-b>'
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -286,6 +321,12 @@ nmap <F4> :YcmDiags<CR>
 nmap <F6> :YcmGenerateConfig<CR>
 nmap <F7> :YcmCompleter FixIt<CR>
 nmap <F8>  :YcmCompleter GoToDefinitionElseDeclaration<CR>
+
+
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+""" vim-scala
+""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+let g:scala_scaladoc_indent = 1
 
 
 """"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
@@ -310,9 +351,10 @@ set completeopt=longest,menu " 代码补全
 set wildmenu                 " 增强模式中的命令行自动完成操作
 set backspace=2              " 使回格键（backspace）正常处理indent, eol, start等
 set mouse=a                  " 可以在buffer的任何地方使用鼠标
+" set mouse=""                 "禁用鼠标
 set selection=exclusive
 set selectmode=mouse,key
-set report=0                 " 通过使用:commands命令，告诉我们文件的哪一行被改变过
+set report=0                 " 总是报告文件的哪一行被改变过
 set hidden                   " 避免必须保存修改才可以跳转buffer
 
 
@@ -355,11 +397,11 @@ autocmd ColorScheme * highlight TrailSpace guibg=red ctermbg=darkred
 """""""""""""""""""""""""""""""""""""""""""""""""""
 " set autoindent               " 自动缩进
 set cindent                  " C风格缩进
-set tabstop=4                " Tab键的宽度
-set softtabstop=4            " 统一缩进为4
-set shiftwidth=4
+set tabstop=2                " Tab键的宽度
+set softtabstop=2            " 统一缩进为4
+set shiftwidth=2
 set expandtab                " 使用空格代替制表符
-au FileType cpp setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
+au FileType cpp,java setlocal expandtab shiftwidth=2 softtabstop=2 tabstop=2
 au FileType python setlocal expandtab shiftwidth=4 softtabstop=4 tabstop=4
 au FileType html,css setlocal noexpandtab shiftwidth=2 softtabstop=2 tabstop=2
 
@@ -411,62 +453,63 @@ nnoremap <Leader>0 :10b<CR>
 autocmd BufNewFile *.cpp,*.[ch],*.sh,*.rb,*.java,*.py,*.php exec ":call SetTitle()"
 ""定义函数SetTitle，自动插入文件头
 func! SetTitle()
-    if &filetype == 'sh'
-        call setline(1,"\#!/bin/bash")
-        call append(line("."), "")
-    elseif &filetype == 'python'
-        call setline(1, "# ------------------------------------------------------------------------")
-        call append(line("."), "# File Name: ".expand("%"))
-        call append(line(".")+1, "# Author: Stranger")
-        call append(line(".")+2, "# Mail: xxueqiang16@gmail.com")
-        call append(line(".")+3, "# Created Time: ".strftime("%c"))
-        call append(line(".")+4, "# ------------------------------------------------------------------------")
-        call append(line(".")+5, "")
-        call append(line(".")+6, "")
-    elseif &filetype == 'ruby'
-        call setline(1,"#!/usr/bin/env ruby")
-        call append(line("."),"# encoding: utf-8")
-        call append(line(".")+1, "")
-    elseif &filetype == 'php'
-        call setline(1,"<?php")
-        call append(line("."), "")
-        call append(line(".")+1, "?>")
-    else
-        call setline(1, "/*************************************************************************")
-        call append(line("."), "    > File Name: ".expand("%"))
-        call append(line(".")+1, "    > Author: Stranger")
-        call append(line(".")+2, "    > Mail: xxueqiang16@gmail.com")
-        call append(line(".")+3, "    > Created Time: ".strftime("%c"))
-        call append(line(".")+4, " ************************************************************************/")
-        call append(line(".")+5, "")
-        call append(line(".")+6, "")
-    endif
-    if expand("%:e") == 'cpp'
-        call append(line(".")+6, "#include <iostream>")
-        call append(line(".")+7, "using namespace std;")
-        call append(line(".")+8, "")
-        call append(line(".")+9, "int main() {}")
-    endif
-    if &filetype == 'c'
-        call append(line(".")+6, "#include<stdio.h>")
-        call append(line(".")+7, "")
-    endif
-    if expand("%:e") == 'h'
-        call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
-        call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
-        call append(line(".")+8, "#endif")
-    endif
-    if &filetype == 'java'
-        call append(line(".")+6,"public class ".expand("%:r"))
-        call append(line(".")+7,"")
-    endif
+  if &filetype == 'sh'
+    call setline(1,"\#!/bin/bash")
+    call append(line("."), "")
+  elseif &filetype == 'python'
+    call setline(1, "# ------------------------------------------------------------------------")
+    call append(line("."), "# File Name: ".expand("%"))
+    call append(line(".")+1, "# Author: Stranger")
+    call append(line(".")+2, "# Mail: xxueqiang16@gmail.com")
+    call append(line(".")+3, "# Created Time: ".strftime("%c"))
+    call append(line(".")+4, "# ------------------------------------------------------------------------")
+    call append(line(".")+5, "")
+    call append(line(".")+6, "")
+  elseif &filetype == 'ruby'
+    call setline(1,"#!/usr/bin/env ruby")
+    call append(line("."),"# encoding: utf-8")
+    call append(line(".")+1, "")
+  elseif &filetype == 'php'
+    call setline(1,"<?php")
+    call append(line("."), "")
+    call append(line(".")+1, "?>")
+  else
+    call setline(1, "/*************************************************************************")
+    call append(line("."), "    > File Name: ".expand("%"))
+    call append(line(".")+1, "    > Author: Stranger")
+    call append(line(".")+2, "    > Mail: xxueqiang16@gmail.com")
+    call append(line(".")+3, "    > Created Time: ".strftime("%c"))
+    call append(line(".")+4, " ************************************************************************/")
+    call append(line(".")+5, "")
+  endif
+  if expand("%:e") == 'cpp'
+    call append(line(".")+6, "#include <iostream>")
+    call append(line(".")+7, "using namespace std;")
+    call append(line(".")+8, "")
+    call append(line(".")+9, "int main() {}")
+  endif
+  if &filetype == 'c'
+    call append(line(".")+6, "#include<stdio.h>")
+    call append(line(".")+7, "")
+  endif
+  if expand("%:e") == 'h'
+    call append(line(".")+6, "#ifndef _".toupper(expand("%:r"))."_H")
+    call append(line(".")+7, "#define _".toupper(expand("%:r"))."_H")
+    call append(line(".")+8, "")
+    call append(line(".")+9, "")
+    call append(line(".")+10, "#endif")
+  endif
+  if &filetype == 'java'
+    call append(line(".")+6,"public class ".expand("%:r"))
+    call append(line(".")+7,"")
+  endif
 
-    "新建文件后，自动定位到文件末尾
-    if &filetype == 'php'
-        normal 2G
-    else
-        normal G
-    endif
+  "新建文件后，自动定位到文件末尾
+  if &filetype == 'php'
+    normal 2G
+  else
+    normal G
+  endif
 endfunc
 
 
@@ -475,29 +518,29 @@ endfunc
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 map <F5> :call CompileRunGcc()<CR>
 func! CompileRunGcc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!clang % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'cpp'
-        exec "!clang++ -std=c++14 % -o %<"
-        exec "!time ./%<"
-    elseif &filetype == 'java'
-        exec "!javac %"
-        exec "!time java %<"
-    elseif &filetype == 'sh'
-        exec "!time bash %<"
-    elseif &filetype == 'python'
-        exec "!time python3 %"
-    elseif &filetype == 'html'
-        exec "!firefox % &"
-    elseif &filetype == 'go'
-        exec "!go build %"
-        exec "!time go run %"
-    elseif &filetype == 'mkd'
-        exec "!~/.vim/markdown.pl % > %.html &"
-        exec "!firefox %.html &"
-    endif
+  exec "w"
+  if &filetype == 'c'
+    exec "!clang % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'cpp'
+    exec "!clang++ -std=c++14 % -o %<"
+    exec "!time ./%<"
+  elseif &filetype == 'java'
+    exec "!javac %"
+    exec "!time java %<"
+  elseif &filetype == 'sh'
+    exec "!time bash %<"
+  elseif &filetype == 'python'
+    exec "!time python3 %"
+  elseif &filetype == 'html'
+    exec "!firefox % &"
+  elseif &filetype == 'go'
+    exec "!go build %"
+    exec "!time go run %"
+  elseif &filetype == 'mkd'
+    exec "!~/.vim/markdown.pl % > %.html &"
+    exec "!firefox %.html &"
+  endif
 endfunc
 
 
@@ -508,26 +551,28 @@ map <F12> :call FormartSrc()<CR><CR>
 
 """定义FormartSrc()
 func! FormartSrc()
-    exec "w"
-    if &filetype == 'c'
-        exec "!astyle --style=ansi -a --suffix=none %"
-    elseif &filetype == 'cpp' || &filetype == 'hpp'
-        exec "r !clang-format --style=Google -i %> /dev/null 2>&1"
-    elseif &filetype == 'perl'
-        exec "!astyle --style=gnu --suffix=none %"
-    elseif &filetype == 'py'||&filetype == 'python'
-        exec "r !autopep8 -i --aggressive %"
-    elseif &filetype == 'java'
-        exec "!astyle --style=java --suffix=none %"
-    elseif &filetype == 'jsp'
-        exec "!astyle --style=gnu --suffix=none %"
-    elseif &filetype == 'xml'
-        exec "!astyle --style=gnu --suffix=none %"
-    else
-        exec "normal gg=G"
-        return
-    endif
-    exec "e! %"
+  exec "w"
+  if &filetype == 'c'
+    exec "!astyle --style=google --suffix=none %"
+  elseif &filetype == 'jsp'
+    exec "!astyle --style=gnu --suffix=none %"
+  elseif &filetype == 'xml'
+    exec "!astyle --style=gnu --suffix=none %"
+  elseif &filetype == 'perl'
+    exec "!astyle --style=gnu --suffix=none %"
+  elseif &filetype == 'cpp' || &filetype == 'hpp'
+    exec "r !clang-format --style=google -i %> /dev/null 2>&1"
+  elseif &filetype == 'py'|| &filetype == 'python'
+    exec "r !autopep8 -i --aggressive %"
+  elseif &filetype == 'java'
+    exec "r !google-java-format -i %"
+  elseif &filetype == 'scala'
+    exec "r !scalariform -q %"
+  else
+    exec "normal gg=G"
+    return
+  endif
+  exec "e! %"
 endfunc
 "结束定义FormartSrc
 
